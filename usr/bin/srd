@@ -1,0 +1,14 @@
+#! /bin/sh
+
+if [ -d .git ]; then
+	WORKING_DIRECTORY=$(pwd)
+else
+	echo "This is not a git repository. Exiting before we damage something."
+	exit 0
+fi
+
+LARGE_FILE_LIST=$(find "$WORKING_DIRECTORY" -size 100M)
+
+for FILE in $LARGE_FILE_LIST; do
+	git filter-branch --prune-empty -d /dev/shm/scratch --index-filter "git rm --cached -f --ignore-unmatch $FILE" --tag-name-filter cat -- --all
+done
