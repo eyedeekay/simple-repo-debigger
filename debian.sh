@@ -7,12 +7,12 @@ DEBFOLDER="simple-repo-debigger"
 SOURCEDOCPATH="usr/share/doc/$DEBFOLDER"
 DEBVERSION=$(date +%Y%m%d)
 
-TOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+TOME="$( cd "$( dirname "$0" )" && pwd )"
 cd $TOME
 
 git pull origin master
 
-DEBFOLDERNAME="../$DEBFOLDER-$DEBVERSION"
+DEBFOLDERNAME="$TOME/../$DEBFOLDER-$DEBVERSION"
 
 # Create your scripts source dir
 mkdir $DEBFOLDERNAME
