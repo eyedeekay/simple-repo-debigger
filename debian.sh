@@ -7,7 +7,11 @@ DEBFOLDER="simple-repo-debigger"
 SOURCEDOCPATH="usr/share/doc/$DEBFOLDER"
 DEBVERSION=$(date +%Y%m%d)
 
-TOME="$( cd "$( dirname "$0" )" && pwd )"
+if [ -n "$BASH_VERSION" ]; then
+	TOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+else
+	TOME=$( cd "$( dirname "$0" )" && pwd )
+fi
 cd $TOME
 
 git pull origin master
